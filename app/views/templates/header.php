@@ -3,6 +3,7 @@
         <div class="menu">
             <a class="menu-item" href="/catalog">Каталог</a>
             <a class="menu-item" href="/login">Админ-панель</a>
+            <a class="menu-item" href="/users">Пользователи</a>
         </div>
 
     </nav>

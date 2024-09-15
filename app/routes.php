@@ -12,6 +12,8 @@ function getRoutes()
         '/' => ['HomeController', 'index', true],
         '/logout' => ['AuthController', 'logout', true],
         '/dashboard' => ['DashboardController', 'index', true],
+        '/users' => ['UsersController', 'index', true],
+        '/users/edit' => ['UsersController', 'edit', true],
 
         // Незащищенные маршруты
         '/catalog' => ['CatalogController', 'index', false],
