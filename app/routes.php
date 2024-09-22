@@ -14,6 +14,8 @@ function getRoutes()
         '/dashboard' => ['DashboardController', 'index', true],
         '/users' => ['UsersController', 'index', true],
         '/users/edit' => ['UsersController', 'edit', true],
+        '/users/create' => ['UsersController', 'create', true],
+        '/users/delete' => ['UsersController', 'delete', true],
 
         // Незащищенные маршруты
         '/catalog' => ['CatalogController', 'index', false],
