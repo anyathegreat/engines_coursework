@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; // Хост
-$user = 'engines'; // Пользователь
-$password = 'RZe-u5C-ArZ-5SY'; // Пароль
-$db_name = 'engines'; // Имя базы данных
+$host = DB_HOST;
+$user = DB_USER;
+$password = DB_PASSWORD;
+$db_name = DB_NAME;
 
 // Создаем соединение
 $mysqli = new mysqli($host, $user, $password, $db_name);

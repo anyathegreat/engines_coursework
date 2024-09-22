@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php'; // Подключаем файл базы данных
 require_once 'app/database.php'; // Подключаем файл базы данных
 require_once 'app/routes.php'; // Подключаем маршруты
 
