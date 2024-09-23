@@ -18,6 +18,7 @@ body {
   min-height: 100dvh;
   width: 100dvw;
   overflow-x: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
@@ -98,4 +99,66 @@ table {
     border: 1px solid black;
     padding: 8px;
   }
+}
+
+.actions-section {
+  display: flex;
+  gap: 4px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
+  border-radius: 4px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f3d1a5;
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #d6c9b8;
+  }
+
+  &:active {
+    background-color: #d6c9b8;
+  }
+
+  &:disabled {
+    background-color: #adadad;
+    color: #474747;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    background-color: #d6c9b8;
+  }
+}
+
+.btn-danger {
+  background-color: #e2a094;
+  color: black;
 }
