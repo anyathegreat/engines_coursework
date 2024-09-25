@@ -26,6 +26,7 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  min-height: 66px;
   max-width: var(--maxWidth);
   background-color: burlywood;
   padding: 10px 14px;

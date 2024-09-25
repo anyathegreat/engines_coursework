@@ -80,11 +80,11 @@ class User
         return true; // Возвращаем true при успешном создании
     }
 
-    public function updateUser($id, $email, $firstname, $lastname, $phone)
+    public function updateUser($id, $email, $firstname, $lastname, $phone, $enabled, $role)
     {
-        $query = "UPDATE users SET email = ?, firstname = ?, lastname = ?, phone = ? WHERE id = ?";
+        $query = "UPDATE users SET email = ?, firstname = ?, lastname = ?, phone = ?, `role` = ?, `enabled` = ? WHERE id = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssssi", $email, $firstname, $lastname, $phone, $id);
+        $stmt->bind_param("sssssii", $email, $firstname, $lastname, $phone, $role, $enabled, $id);
         $isSuccess = $stmt->execute();
         if ($isSuccess) {
             $updatedUser = $this->getUserById($id);
