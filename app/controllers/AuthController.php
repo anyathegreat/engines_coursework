@@ -23,6 +23,7 @@ class AuthController
             if ($user && password_verify($password, $user['password_hash'])) {
                 // Успешный вход
                 $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_role'] = $user['role'];
                 header('Location: /dashboard'); // редирект на главную страницу
                 exit;
             } else {
