@@ -75,9 +75,11 @@ class UsersController
       $firstname = $_POST['firstname'];
       $lastname = $_POST['lastname'];
       $phone = $_POST['phone'];
+      $enabled = $_POST['enabled'];
+      $role = $_POST['role'];
 
       // Обновление данных пользователя
-      $response = $this->userModel->updateUser($id, $email, $firstname, $lastname, $phone);
+      $response = $this->userModel->updateUser($id, $email, $firstname, $lastname, $phone, $enabled, $role);
 
       if ($response) {
         // Если обновление прошло успешно

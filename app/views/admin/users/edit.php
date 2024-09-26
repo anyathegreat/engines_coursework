@@ -16,6 +16,14 @@
   </div>
 
   <div class="form-group">
+    <label for="enabled">Статус:</label>
+    <select name="enabled">
+      <option value="1" <?php echo $user['enabled'] == '1' ? 'selected' : ''; ?>>Активен</option>
+      <option value="0" <?php echo $user['enabled'] == '0' ? 'selected' : ''; ?>>Отключен</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="firstname">Имя:</label>
     <input type="text" name="firstname" value="<?php echo $user['firstname']; ?>">
   </div>

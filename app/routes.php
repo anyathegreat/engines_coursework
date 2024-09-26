@@ -9,17 +9,18 @@ function getRoutes()
     // Контроллер / Метод / Защищенный маршрут
     $routes = [
         // Защищённые маршруты
-        '/' => ['HomeController', 'index', true],
-        '/logout' => ['AuthController', 'logout', true],
-        '/dashboard' => ['DashboardController', 'index', true],
-        '/users' => ['UsersController', 'index', true],
-        '/users/edit' => ['UsersController', 'edit', true],
-        '/users/create' => ['UsersController', 'create', true],
-        '/users/delete' => ['UsersController', 'delete', true],
+        '/' => ['HomeController', 'index', ["anonymous"]],
+        '/logout' => ['AuthController', 'logout', []],
+        '/dashboard' => ['DashboardController', 'index', []],
+        '/users' => ['UsersController', 'index', ["admin"]],
+        '/users/edit' => ['UsersController', 'edit', ["admin"]],
+        '/users/create' => ['UsersController', 'create', ["admin"]],
+        '/users/delete' => ['UsersController', 'delete', ["admin"]],
+        '/orders' => ['OrdersController', 'index', ["user", "admin"]],
 
         // Незащищенные маршруты
-        '/catalog' => ['CatalogController', 'index', false],
-        '/login' => ['AuthController', 'login', false],
+        '/catalog' => ['CatalogController', 'index', ["anonymous"]],
+        '/login' => ['AuthController', 'login', ["anonymous"]],
     ];
 
     return $routes;
@@ -38,11 +39,10 @@ function getPublicRoutes()
 
     $result = [];
     foreach ($routes as $route => $data) {
-        if ($data[2] === false) {
+        if (in_array("anonymous", $data[2])) {
             $result[] = $route;
         }
     }
-
     return $result;
 }
 
@@ -52,7 +52,7 @@ function getPrivateRoutes()
 
     $result = [];
     foreach ($routes as $route => $data) {
-        if ($data[2] === true) {
+        if (empty($data[2]) || in_array("anonymous", $data[2]) || (isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], $data[2]))) {
             $result[] = $route;
         }
     }
