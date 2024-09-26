@@ -7,13 +7,6 @@ if (!isset($_SESSION)) {
 }
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-// Проверка авторизации
-if (!isLoggedIn() && !in_array($requestUri, getPublicRoutes())) {
-    header('Location: /login');
-    exit;
-}
-
 $route = getRoute($requestUri);
 
 if (!$route) {
@@ -22,6 +15,20 @@ if (!$route) {
 
     exit;
 }
+
+if (isLoggedIn()) {
+    if (!(empty($route[2]) || in_array("anonymous", $route[2]) || (isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], $route[2])))) {
+        header("Location: /");
+        exit;
+    }
+} else {
+    if (!in_array("anonymous", $route[2])) {
+        header("Location: /");
+        exit;
+    }
+}
+
+
 
 list($controllerName, $methodName) = $route;
 

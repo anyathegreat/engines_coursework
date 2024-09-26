@@ -9,7 +9,7 @@ function getRoutes()
     // Контроллер / Метод / Защищенный маршрут
     $routes = [
         // Защищённые маршруты
-        '/' => ['HomeController', 'index', []],
+        '/' => ['HomeController', 'index', ["anonymous"]],
         '/logout' => ['AuthController', 'logout', []],
         '/dashboard' => ['DashboardController', 'index', []],
         '/users' => ['UsersController', 'index', ["admin"]],
