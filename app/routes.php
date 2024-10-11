@@ -17,6 +17,7 @@ function getRoutes()
         '/users/create' => ['UsersController', 'create', ["admin"]],
         '/users/delete' => ['UsersController', 'delete', ["admin"]],
         '/orders' => ['OrdersController', 'index', ["user", "admin"]],
+        '/products' => ['ProductsController', 'index', ["admin"]],
 
         // Незащищенные маршруты
         '/catalog' => ['CatalogController', 'index', ["anonymous"]],
