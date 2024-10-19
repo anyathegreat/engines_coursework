@@ -15,7 +15,8 @@
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <tr>
-                    <td><img alt="Типа деталька" src="https://via.placeholder.com/100" /></td>
+                    <td><img alt="Типа деталька" width="100" height="100"
+                            src="<?php echo htmlspecialchars($product['img']) ?>" /></td>
                     <td><?php echo htmlspecialchars($product['article']); ?></td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
                     <td><?php echo htmlspecialchars($product['description']); ?></td>

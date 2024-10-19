@@ -1,7 +1,7 @@
 <h1>Товары</h1>
 <section class="actions-section">
   <div class="section-col">
-    <a href="#" class="btn">Создать товар</a>
+    <a href="/products/create" class="btn">Создать товар</a>
   </div>
   <div class="section-col"></div>
 </section>
@@ -13,6 +13,7 @@
       <th>Цена (руб.)</th>
       <th>Количество</th>
       <th>Двигатель</th>
+      <th>Действия</th>
     </tr>
   </thead>
   <tbody>
@@ -24,10 +25,10 @@
           <td><?php echo htmlspecialchars($product['price']); ?></td>
           <td><?php echo htmlspecialchars($product['count']); ?></td>
           <td><?php echo htmlspecialchars(getEngineName($product['engine_id'], $engines)); ?></td>
-          <!-- <td>
-            <a href="/users/edit?id=<?php echo $product['id']; ?>" class="btn">Редактировать</a>
-            <a href="/users/delete?id=<?php echo $product['id']; ?>" class="btn btn-danger">Удалить</a>
-          </td> -->
+          <td>
+            <a href="/products/edit?id=<?php echo $product['id']; ?>" class="btn">Редактировать</a>
+            <a href="/products/delete?id=<?php echo $product['id']; ?>" class="btn btn-danger">Удалить</a>
+          </td>
         </tr>
       <?php endforeach; ?>
     <?php else: ?>

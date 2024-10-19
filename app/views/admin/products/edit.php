@@ -1,35 +1,39 @@
-<h1>Создание нового товар</h1>
-<?php if (isset($errorMessage)): ?>
-  <p style="color:red;"><?php echo htmlspecialchars($errorMessage); ?></p>
-<?php endif; ?>
-
+<h1>Редактировать товар</h1>
 <form id="product-form" enctype="multipart/form-data" action="" method="post">
+  <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+
   <div class="form-group">
     <label for="article">Артикул:</label>
-    <input required type="text" name="article" value="">
+    <input type="text" name="article" value="<?php echo $product['article']; ?>">
   </div>
 
   <div class="form-group">
     <label for="name">Название:</label>
-    <input required type="text" name="name" value="">
+    <input type="text" name="name" value="<?php echo $product['name']; ?>">
   </div>
 
   <div class="form-group">
-    <label for="description">Описание: <span class="field-extra-label">(необязательно)</span></label>
-    <textarea name="description" rows="6"></textarea>
+    <label for="description">Описание:</label>
+    <textarea name="description" rows="6"><?php echo htmlspecialchars($product['description']); ?></textarea>
   </div>
 
   <div class="form-group">
     <label for="price">Цена:</label>
-    <input required type="number" name="price" min="0" max="999999999" step=".01" value="0">
+    <input type="number" name="price" min="0" max="999999999" step=".01" value="<?php echo $product['price']; ?>">
   </div>
 
   <div class="form-group">
-    <label for="price">Двигатель: <span class="field-extra-label">(необязательно)</span></label>
-    <select  name="engine_id">
+    <label for="count">Количество:</label>
+    <input type="number" name="count" min="0" max="999999999" value="<?php echo $product['count']; ?>">
+  </div>
+
+  <div class="form-group">
+    <label for="price">Двигатель:</label>
+    <select name="engine_id">
       <option value="">Выбрать двигатель...</option>
       <?php foreach ($engines as $engine): ?>
-        <option value="<?php echo $engine['id']; ?>">
+        <option value="<?php echo $engine['id']; ?>" <?php if ($engine['id'] == $product['engine_id'])
+             echo 'selected'; ?>>
           <?php echo $engine['name']; ?>
         </option>
       <?php endforeach; ?>
@@ -37,12 +41,16 @@
   </div>
 
   <div class="form-group">
-    <label for="avatar">Картинка: <span class="field-extra-label">(необязательно)</span></label>
+    <label for="avatar">Картинка:</label>
     <div class="preview" style="display: flex; gap: 24px">
       <figure class="prewiew-img">
-        <div class="img-container">
-          <img id="new-avatar" width="200" height="200" />
-        </div>
+      <div class="img-container">
+        <img id="old-avatar" width="200" height="200" src="data:image/jpeg;base64,<?php echo base64_encode($product['img']) ?>" />
+      </div>
+        <figcaption>Старое изображение</figcaption>
+      </figure>
+      <figure class="prewiew-img">
+        <img id="new-avatar" width="200" height="200" />
         <figcaption>Новое изображение</figcaption>
         <input id="new-avatar-input" type="file" name="img" value="<?php echo $product['name']; ?>" accept="image/*">
       </figure>
@@ -51,7 +59,7 @@
 
   <div class="form-actions">
     <button type="reset">Сбросить</button>
-    <button type="submit">Создать</button>
+    <button type="submit">Сохранить</button>
   </div>
 </form>
 <hr>

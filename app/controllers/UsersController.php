@@ -53,7 +53,7 @@ class UsersController
 
   public function edit()
   {
-    // Получение ID пользователя из URL
+    // Получение id пользователя из URL
     parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
     $userId = $params["id"];
     $user = $this->userModel->getUserById($userId);
@@ -104,7 +104,7 @@ class UsersController
 
   public function delete()
   {
-    // Получение ID пользователя из URL
+    // Получение id пользователя из URL
     parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
     $userId = $params["id"];
 
@@ -145,39 +145,4 @@ class UsersController
     // Отображение формы удаления, если это не DELETE-запрос
     require_once 'app/views/admin/users/delete.php';
   }
-
-
-  // public function edit()
-  // {
-  //   parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
-  //   $userId = $params["id"];
-  //   $user = $this->userModel->getUserById($userId);
-
-  //   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  //     // Получаем данные из формы
-  //     $id = $_POST['id'];
-  //     $email = $_POST['email'];
-  //     $firstname = $_POST['firstname'];
-  //     $lastname = $_POST['lastname'];
-  //     $phone = $_POST['phone'];
-
-  //     $foundUser = $this->userModel->getUserById($id);
-
-  //     // Проверка пользовательского пароля
-  //     if ($foundUser) {
-  //       $response = $this->userModel->updateUser($id, $email, $firstname, $lastname, $phone);
-  //       if ($response) {
-  //         $user = $response;
-  //       } else {
-  //         echo 'Не удалось получить обновлённые данные пользователя';
-  //       }
-  //       echo 'Данные обновленны';
-  //       // header("Location: /users/edit?id=$id"); // редирект на главную страницу
-  //     } else {
-  //       echo 'Пользователь не найден';
-  //     }
-  //   }
-
-  //   require_once 'app/views/admin/users/edit.php';
-  // }
 }

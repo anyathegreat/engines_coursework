@@ -2,7 +2,7 @@
 function getEngineName($id, $arr)
 {
   foreach ($arr as $el) {
-    if ($el["ID"] == $id)
+    if ($el["id"] == $id)
       return $el["name"];
   }
 

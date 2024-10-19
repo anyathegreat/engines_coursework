@@ -163,3 +163,22 @@ form {
   background-color: #e2a094;
   color: black;
 }
+
+.prewiew-img {
+  margin: 0;
+
+  .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+  }
+}
+
+.field-extra-label {
+  color: gray;
+  font-size: 0.875rem;
+}
