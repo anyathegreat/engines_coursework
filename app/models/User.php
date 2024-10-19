@@ -101,7 +101,7 @@ class User
         if ($stmt === false) {
             throw new Exception("Ошибка подготовки запроса: " . $this->db->error);
         }
-        $stmt->bind_param("i", $userId); // Параметр - ID пользователя
+        $stmt->bind_param("i", $userId); // Параметр - id пользователя
         $result = $stmt->execute();
         $stmt->close();
 

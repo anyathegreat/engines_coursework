@@ -3,6 +3,7 @@ $links = [
     ["/users", "Пользователи", ["admin"]],
     ["/orders", "Заказы", []],
     ["/catalog", "Каталог", ["anonymous"]],
+    ["/products", "Продукты", ["admin"]],
     ["/login", "Админ-панель", ["anonymous"]],
 ];
 ?>
