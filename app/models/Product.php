@@ -7,7 +7,7 @@ class Product
     {
         $this->db = $db;
     }
-    
+
     // Получение продукта по id
     public function getProductById($id)
     {
@@ -23,7 +23,7 @@ class Product
     {
         $query = "INSERT INTO products (article, name, description, price, count, engine_id, img) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sssdiib", $article, $name, $description, $price, $count, $engine_id, $img);
+        $stmt->bind_param("sssdiis", $article, $name, $description, $price, $count, $engine_id, $img);
         return $stmt->execute();
     }
 
@@ -32,7 +32,7 @@ class Product
     {
         $query = "UPDATE products SET article = ?, name = ?, description = ?, price = ?, count = ?, engine_id = ?, img = ? WHERE id = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sssdiibi", $article, $name, $description, $price, $count, $engine_id, $img, $id);
+        $stmt->bind_param("sssdiisi", $article, $name, $description, $price, $count, $engine_id, $img, $id);
         return $stmt->execute();
     }
 
