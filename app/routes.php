@@ -16,11 +16,12 @@ function getRoutes()
         '/users/edit' => ['UsersController', 'edit', ["admin"]],
         '/users/create' => ['UsersController', 'create', ["admin"]],
         '/users/delete' => ['UsersController', 'delete', ["admin"]],
-        '/orders' => ['OrdersController', 'index', ["user", "admin"]],
         '/products' => ['ProductsController', 'index', ["admin"]],
         '/products/edit' => ['ProductsController', 'edit', ["admin"]],
         '/products/create' => ['ProductsController', 'create', ["admin"]],
         '/products/delete' => ['ProductsController', 'delete', ["admin"]],
+        '/orders' => ['OrdersController', 'index', ["user", "admin"]],
+        '/order' => ['OrderController', 'index', ["user", "admin"]],
 
         // Незащищенные маршруты
         '/catalog' => ['CatalogController', 'index', ["anonymous"]],
