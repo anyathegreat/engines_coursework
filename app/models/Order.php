@@ -11,11 +11,59 @@ class Order
   // Получение продукта по id
   public function getOrderById($id)
   {
-    $query = "SELECT * FROM orders WHERE id = ?";
-    $stmt = $this->db->prepare($query);
+    $queryOrder = "SELECT * FROM orders WHERE id = ?";
+
+    $stmt = $this->db->prepare($queryOrder);
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
+    $order = $stmt->get_result()->fetch_assoc();
+    $orderId = $order['id'];
+
+    $queryProducts = "
+      SELECT 
+        order_products.order_id,
+        order_products.product_id,
+        order_products.count,
+        products.id AS product_id,
+        products.article AS product_article,
+        products.name AS product_name,
+        products.description AS product_description,
+        products.count AS product_count,
+        products.price AS product_price,
+        products.engine_id AS product_engine_id
+      FROM 
+        order_products
+      LEFT JOIN 
+        products ON order_products.product_id = products.id 
+      WHERE 
+        order_products.order_id IN ($orderId);
+    ";
+
+    $resultProducts = $this->db->query($queryProducts);
+    $products = $resultProducts->fetch_all(MYSQLI_ASSOC);
+
+    foreach ($products as $key => $product) {
+      $products[$key] = [
+        'id' => $product['product_id'],
+        'count_in_order' => $product['count'],
+        'product_article' => $product['product_article'],
+        'product_name' => $product['product_name'],
+        'product_description' => $product['product_description'],
+        'product_count' => $product['product_count'],
+        'product_price' => $product['product_price'],
+        'product_engine_id' => $product['product_engine_id'],
+      ];
+    }
+
+    // Присоединяем продукты к каждому заказу
+    $order['products'] = isset($products) ? $products : [];
+
+    $order['price'] = 0;
+    foreach ($order['products'] as $product) {
+      $order['price'] += $product['product_price'] * $product['count_in_order'];
+    }
+
+    return $order;
   }
 
   // Получение всех продуктов
@@ -25,9 +73,11 @@ class Order
     $result = $this->db->query($query);
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+
   public function getAllOrdersWithCustomer()
   {
-    $query = "
+    // Запрос для получения заказов и информации о клиентах
+    $queryOrders = "
       SELECT 
         orders.id AS order_id,
         orders.date_created,
@@ -43,7 +93,63 @@ class Order
       LEFT JOIN 
         customers ON orders.customerID = customers.id;
     ";
-    $result = $this->db->query($query);
-    return $result->fetch_all(MYSQLI_ASSOC);
+
+    $resultOrders = $this->db->query($queryOrders);
+    $orders = $resultOrders->fetch_all(MYSQLI_ASSOC);
+
+    // Вытаскиваем список всех продуктов для полученных заказов
+    $orderIds = array_column($orders, 'order_id');
+    $orderIdsString = implode(',', array_map('intval', $orderIds));
+
+    // Запрос для получения продуктов, связанных с заказами
+    $queryProducts = "
+      SELECT 
+        order_products.order_id,
+        order_products.product_id,
+        order_products.count,
+        products.id AS product_id,
+        products.article AS product_article,
+        products.name AS product_name,
+        products.description AS product_description,
+        products.count AS product_count,
+        products.price AS product_price,
+        products.engine_id AS product_engine_id
+      FROM 
+        order_products
+      LEFT JOIN 
+        products ON order_products.product_id = products.id 
+      WHERE 
+        order_products.order_id IN ($orderIdsString);
+    ";
+
+    $resultProducts = $this->db->query($queryProducts);
+    $products = $resultProducts->fetch_all(MYSQLI_ASSOC);
+
+    // Формируем ассоциативный массив для связи заказов с продуктами
+    $productsByOrderId = [];
+    foreach ($products as $product) {
+      $productsByOrderId[$product['order_id']][] = [
+        'id' => $product['product_id'],
+        'count_in_order' => $product['count'],
+        'product_article' => $product['product_article'],
+        'product_name' => $product['product_name'],
+        'product_description' => $product['product_description'],
+        'product_count' => $product['product_count'],
+        'product_price' => $product['product_price'],
+        'product_engine_id' => $product['product_engine_id'],
+      ];
+    }
+
+    // Присоединяем продукты к каждому заказу
+    foreach ($orders as &$order) {
+      $order['products'] = isset($productsByOrderId[$order['order_id']]) ? $productsByOrderId[$order['order_id']] : [];
+
+      $order['price'] = 0;
+      foreach ($order['products'] as $product) {
+        $order['price'] += $product['product_price'] * $product['count_in_order'];
+      }
+    }
+
+    return $orders;
   }
 }

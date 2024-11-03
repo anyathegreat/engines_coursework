@@ -18,6 +18,7 @@ class OrderController
     parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
     $orderId = $params["id"];
     $order = $this->orderModel->getOrderById($orderId);
+    $products = $order['products'];
     $customer = $this->customerModel->getCustomerById($order["customerID"]);
     require_once 'app/views/admin/order/index.php';
   }

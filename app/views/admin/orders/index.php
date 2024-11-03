@@ -9,6 +9,7 @@
       <th>Почта</th>
       <th>Телефон</th>
       <th>Цена</th>
+      <th>Продукты</th>
       <th>Действия</th>
     </tr>
   </thead>
@@ -24,6 +25,11 @@
           <td><?php echo htmlspecialchars($order['phone']); ?></td>
           <td><?php echo htmlspecialchars($order['price'] ?? 0); ?></td>
           <td>
+            <?php foreach ($order['products'] as $product): ?>
+              <div><?php echo htmlspecialchars($product['product_name']); ?></div>
+            <?php endforeach; ?>
+          </td>
+          <td>
             <a href="/order?id=<?php echo $order['order_id']; ?>" class="btn">Открыть</a>
             <a href="/order/delete?id=<?php echo $order['order_id']; ?>" class="btn btn-danger">Удалить</a>
           </td>
@@ -31,7 +37,7 @@
       <?php endforeach; ?>
     <?php else: ?>
       <tr>
-        <td colspan="8">Нет заказов.</td>
+        <td colspan="9">Нет заказов.</td>
       </tr>
     <?php endif; ?>
   </tbody>
