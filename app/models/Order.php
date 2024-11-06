@@ -8,8 +8,18 @@ class Order
     $this->db = $db;
   }
 
-  // Получение продукта по id
   public function getOrderById($id)
+  {
+    $queryOrder = "SELECT * FROM orders WHERE id = ?";
+
+    $stmt = $this->db->prepare($queryOrder);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+  }
+
+  // Получение продукта по id
+  public function getOrderWithProductsById($id)
   {
     $queryOrder = "SELECT * FROM orders WHERE id = ?";
 
@@ -151,5 +161,19 @@ class Order
     }
 
     return $orders;
+  }
+
+  public function deleteOrder($id)
+  {
+    $queryOrderProducts = "DELETE FROM order_products WHERE order_id = ?";
+    $stmtOrderProducts = $this->db->prepare($queryOrderProducts);
+    $stmtOrderProducts->bind_param("i", $id);
+    $stmtOrderProducts->execute();
+
+    $queryOrder = "DELETE FROM orders WHERE id = ?";
+    $stmtOrder = $this->db->prepare($queryOrder);
+    $stmtOrder->bind_param("i", $id);
+
+    return $stmtOrder->execute();
   }
 }
