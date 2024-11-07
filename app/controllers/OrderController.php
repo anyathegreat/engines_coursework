@@ -33,6 +33,30 @@ class OrderController
 
     $orderProducts = $this->orderProductModel->getOrderProductsById($orderId);
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $id = $_POST['orderId'];
+      $productCodes = $_POST['productCodes'];
+
+      $this->orderProductModel->updateOrderProducts($id, $productCodes);
+
+      try {
+        // Вызываем метод создания пользователя
+        $this->orderProductModel->updateOrderProducts($id, $productCodes);
+
+        // Параметры для страницы успеха
+        $title = "Товары обновлены";
+        $message = "Вы успешно обновили товары";
+        $redirect_url = "/order?id=$id";
+
+        // Включаем страницу успеха
+        include 'app/views/messageSuccess.php';
+        return;
+      } catch (Exception $e) {
+        // Обрабатываем исключение и передаем сообщение об ошибке
+        $errorMessage = $e->getMessage();
+      }
+    }
+
     require_once 'app/views/admin/order/editProducts.php';
   }
 

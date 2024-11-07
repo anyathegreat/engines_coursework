@@ -1,7 +1,10 @@
 <a href="/order?id=<?php echo $orderId; ?>" class="btn">Вернуться</a>
 <hr>
 <h1>Список товаров в заказе №<?php echo $orderId; ?></h1>
-<form action="">
+<?php if (isset($errorMessage)): ?>
+  <p style="color:red;"><?php echo htmlspecialchars($errorMessage); ?></p>
+<?php endif; ?>
+<form action="/order/editProducts?id=<?php echo $orderId; ?>" method="post" id="products-form">
   <table>
     <thead>
       <tr>
@@ -19,7 +22,7 @@
             <td><?php echo htmlspecialchars($product['product_article']); ?></td>
             <td><?php echo htmlspecialchars($product['product_name']); ?></td>
             <td><?php echo htmlspecialchars($product['product_price']); ?></td>
-            <td><input type="number" name="<?php $orderId . '-' . $product['product_id']; ?>"
+            <td><input type="number" name="<?php echo $product['product_id']; ?>"
                 value="<?php echo htmlspecialchars($product['count']); ?>" min="1" max="999" class="input-product-count">
             </td>
             <td>
@@ -59,4 +62,44 @@
       }
     });
   })
+</script>
+
+<script>
+  const form = document.getElementById('products-form');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const inputsArr = [];
+    const inputs = document.querySelectorAll('.input-product-count');
+
+    inputs.forEach(input => {
+      inputsArr.push({ product_id: input.name, count: input.value });
+    });
+
+    const formData = new FormData();
+
+    formData.append('orderId', '<?php echo $orderId; ?>');
+
+    inputsArr.forEach(input => {
+      formData.append('productCodes[]', input.product_id + '-' + input.count);
+    })
+
+    console.log(Array.from(formData.entries()));
+
+    fetch('/order/edit/products?id=<?php echo $orderId; ?>', {
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        // window.location.href = '/order?id=' + '<?php echo $orderId; ?>';
+        console.log(response);
+        return response.text();
+      }
+    }).then(text => {
+      document.open();
+      document.write(text);
+      document.close();
+    });
+  });
 </script>
