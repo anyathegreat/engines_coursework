@@ -1,16 +1,19 @@
 <?php
 require_once 'app/models/Order.php';
 require_once 'app/models/Customer.php';
+require_once 'app/models/OrderProduct.php';
 
 class OrderController
 {
   private $orderModel;
+  private $orderProductModel;
   private $customerModel;
 
   public function __construct($db)
   {
     $this->orderModel = new Order($db);
     $this->customerModel = new Customer($db);
+    $this->orderProductModel = new OrderProduct($db);
   }
 
   public function index()
@@ -21,6 +24,26 @@ class OrderController
     $products = $order['products'];
     $customer = $this->customerModel->getCustomerById($order["customerID"]);
     require_once 'app/views/admin/order/index.php';
+  }
+
+  public function editProducts()
+  {
+    parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
+    $orderId = $params["id"];
+
+    $orderProducts = $this->orderProductModel->getOrderProductsById($orderId);
+
+    require_once 'app/views/admin/order/editProducts.php';
+  }
+
+  public function edit()
+  {
+    parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
+    $orderId = $params["id"];
+
+    $order = $this->orderModel->getOrderWithProductsById($orderId);
+
+    require_once 'app/views/admin/order/edit.php';
   }
 
   public function delete()

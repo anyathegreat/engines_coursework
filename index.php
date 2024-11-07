@@ -3,6 +3,7 @@ require_once 'config.php'; // Подключаем файл базы данны�
 require_once 'app/database.php'; // Подключаем файл базы данных
 require_once 'app/routes.php'; // Подключаем маршруты
 require_once 'app/_helpers/index.php';
+require_once 'app/_constants/index.php';
 
 if (!isset($_SESSION)) {
     session_start();

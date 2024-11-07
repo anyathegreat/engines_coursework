@@ -1,4 +1,6 @@
 <a href="/orders" class="btn">Вернуться</a>
+<a href="/order/edit?id=<?php echo $order['id']; ?>" class="btn">Редактировать</a>
+<a href="/order/edit/products?id=<?php echo $order['id']; ?>" class="btn">Список товаров</a>
 <hr>
 <h1>Детали заказа</h1>
 <div>

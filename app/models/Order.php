@@ -34,7 +34,6 @@ class Order
         order_products.order_id,
         order_products.product_id,
         order_products.count,
-        products.id AS product_id,
         products.article AS product_article,
         products.name AS product_name,
         products.description AS product_description,

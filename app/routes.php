@@ -23,6 +23,8 @@ function getRoutes()
         '/orders' => ['OrdersController', 'index', ["user", "admin"]],
         '/order' => ['OrderController', 'index', ["user", "admin"]],
         '/order/delete' => ['OrderController', 'delete', ["admin"]],
+        '/order/edit' => ['OrderController', 'edit', ["user", "admin"]],
+        '/order/edit/products' => ['OrderController', 'editProducts', ["user", "admin"]],
 
         // Незащищенные маршруты
         '/catalog' => ['CatalogController', 'index', ["anonymous"]],
