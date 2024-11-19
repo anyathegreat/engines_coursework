@@ -2,18 +2,21 @@
 require_once 'app/models/Order.php';
 require_once 'app/models/Customer.php';
 require_once 'app/models/OrderProduct.php';
+require_once 'app/models/Product.php';
 
 class OrderController
 {
   private $orderModel;
   private $orderProductModel;
   private $customerModel;
+  private $productModel;
 
   public function __construct($db)
   {
     $this->orderModel = new Order($db);
     $this->customerModel = new Customer($db);
     $this->orderProductModel = new OrderProduct($db);
+    $this->productModel = new Product($db);
   }
 
   public function index()
@@ -32,6 +35,15 @@ class OrderController
     $orderId = $params["id"];
 
     $orderProducts = $this->orderProductModel->getOrderProductsById($orderId);
+    $allProducts = $this->productModel->getAllProducts();
+
+    $allProductsMin = array_map(function ($product) {
+      unset($product['description']);
+      unset($product['img']);
+      unset($product['engine_id']);
+
+      return $product;
+    }, $allProducts);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $id = $_POST['orderId'];
