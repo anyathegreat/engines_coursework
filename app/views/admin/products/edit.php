@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="price">Двигатель:</label>
-    <select name="engine_id">
+    <select name="price">
       <option value="">Выбрать двигатель...</option>
       <?php foreach ($engines as $engine): ?>
         <option value="<?php echo $engine['id']; ?>" <?php if ($engine['id'] == $product['engine_id'])
@@ -44,9 +44,10 @@
     <label for="avatar">Картинка:</label>
     <div class="preview" style="display: flex; gap: 24px">
       <figure class="prewiew-img">
-      <div class="img-container">
-        <img id="old-avatar" width="200" height="200" src="data:image/jpeg;base64,<?php echo base64_encode($product['img']) ?>" />
-      </div>
+        <div class="img-container">
+          <img id="old-avatar" width="200" height="200"
+            src="data:image/jpeg;base64,<?php echo base64_encode($product['img']) ?>" />
+        </div>
         <figcaption>Старое изображение</figcaption>
       </figure>
       <figure class="prewiew-img">
