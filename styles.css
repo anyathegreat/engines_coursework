@@ -182,3 +182,42 @@ form {
   color: gray;
   font-size: 0.875rem;
 }
+
+.pagination {
+  display: flex;
+  gap: 6px;
+  width: max-content;
+  padding: 30px 0;
+  margin: 0 auto;
+}
+
+.pagination-input-container {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination-input {
+  width: 3rem;
+}
+
+.pagination-divider {
+  width: 1px;
+  margin: 0 2px;
+}
+
+.pagination-btn {
+  display: block;
+  padding: 6px 8px;
+  text-decoration: none;
+  color: black;
+  background-color: #f3d1a5;
+}
+
+.pagination-disabled {
+  background-color: #adadad;
+}
+
+.pagination-active {
+  background-color: #f0c388;
+  transform: translateY(-4px);
+}

@@ -134,7 +134,7 @@
       const value = parseInt(input.value, 10);
 
       if (isNaN(value) || value < 1 || value > 999) {
-        input.value = input.dataset.lastCorrectValue;
+        input.value = input.dataset.lastCorrectValue || 1;
       } else {
         input.value = value;
         input.dataset.lastCorrectValue = value;
