@@ -10,7 +10,7 @@ if (isset($_SESSION['user_email'])) {
 ?>
 
 <h1>Вход</h1>
-<form action="" method="POST">
+<form class="form" action="" method="POST">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Пароль" required>
     <button type="submit">Войти</button>
