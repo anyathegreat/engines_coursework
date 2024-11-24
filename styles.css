@@ -139,6 +139,7 @@ table {
   background-color: #f3d1a5;
   color: black;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     background-color: #d6c9b8;
@@ -212,10 +213,30 @@ table {
   background-color: #f3d1a5;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d6c9b8;
+  }
+
+  &:active {
+    background-color: #d6c9b8;
+  }
+
+  &:disabled {
+    background-color: #adadad;
+    color: #474747;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    background-color: #d6c9b8;
+  }
 }
 
 .pagination-disabled {
   background-color: #adadad;
+  cursor: not-allowed;
 }
 
 .pagination-active {
@@ -264,4 +285,5 @@ table {
 .filters-actions .btn {
   font-size: 1rem;
   padding: 8px 12px;
+  cursor: pointer;
 }
