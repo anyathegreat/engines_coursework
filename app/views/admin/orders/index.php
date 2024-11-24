@@ -232,7 +232,7 @@
     }
 
     if (form.phone.value?.trim()) {
-      url += "&phone=" + encodeURIComponent(form.phone.value?.trim());
+      url += "&phone=" + encodeURIComponent(form.phone.value?.trim()?.replace(/[^0-9]/g, ''));
     }
 
     if (form.firstname.value?.trim()) {
