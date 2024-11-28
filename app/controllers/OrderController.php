@@ -47,13 +47,17 @@ class OrderController
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $id = $_POST['orderId'];
-      $productCodes = $_POST['productCodes'];
-
-      $this->orderProductModel->updateOrderProducts($id, $productCodes);
+      $productCodes = $_POST['productCodes'] ?? [];
 
       try {
         // Вызываем метод создания пользователя
-        $this->orderProductModel->updateOrderProducts($id, $productCodes);
+        if (empty($productCodes)) {
+          $this->orderProductModel->deleteOrderProducts($id);
+        } else {
+          $this->orderProductModel->updateOrderProducts($id, $productCodes);
+        }
+
+        $this->orderModel->refreshDateUpdated($id);
 
         // Параметры для страницы успеха
         $title = "Товары обновлены";

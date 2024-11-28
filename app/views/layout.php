@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/helpers.css">
     <link rel="stylesheet" href="/public/css/libs/select2/select2.min.css">
     <script src="/public/js/libs/jquery/jquery.min.js"></script>
     <script src="/public/js/libs/select2/select2.min.js"></script>

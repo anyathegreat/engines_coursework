@@ -71,4 +71,14 @@ class OrderProduct
 
     return true;
   }
+
+  public function deleteOrderProducts($orderId)
+  {
+    $query = "DELETE FROM order_products WHERE order_id = ?;";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("i", $orderId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
 }

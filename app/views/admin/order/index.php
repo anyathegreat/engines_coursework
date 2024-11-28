@@ -20,7 +20,7 @@
     <span>Статус</span>: <span><?php echo $order['status']; ?></span>
   </div>
   <div>
-    <span>Телефон</span>: <span><?php echo $customer['phone']; ?></span>
+    <span>Телефон</span>: <span><?php echo $customer['phone'] ?? '–'; ?></span>
   </div>
   <div>
     <span>Общая стоимость</span>: <span><?php echo $order['price']; ?></span>
@@ -28,21 +28,30 @@
 </div>
 <div>
   <h2>Товары в заказе</h2>
-  <div>
-    <?php foreach ($products as $product): ?>
-      <div>
-        <span>Название</span>: <span><?php echo $product['product_name']; ?></span>
-      </div>
-      <div>
-        <span>Артикул</span>: <span><?php echo $product['product_article']; ?></span>
-      </div>
-      <div>
-        <span>Количество</span>: <span><?php echo $product['count_in_order']; ?></span>
-      </div>
-      <div>
-        <span>Цена</span>: <span><?php echo $product['product_price']; ?></span>
-      </div>
-      <br>
-    <?php endforeach; ?>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th style="width: 20%;">Артикул</th>
+        <th style="width: 12%;">Кол-во</th>
+        <th style="width: 12%;">Цена</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if (!empty($products)): ?>
+        <?php foreach ($products as $product): ?>
+          <tr>
+            <td><?php echo $product['product_name']; ?></td>
+            <td><?php echo $product['product_article']; ?></td>
+            <td><?php echo $product['count_in_order']; ?></td>
+            <td><?php echo $product['product_price']; ?></td>
+          </tr>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <tr>
+          <td colspan="4">Нет товаров.</td>
+        </tr>
+      <?php endif; ?>
+    </tbody>
+  </table>
 </div>

@@ -108,7 +108,7 @@
               <?php endforeach; ?>
             </td>
             <td>
-              <a href="/order?id=<?php echo $order['order_id']; ?>" class="btn">Открыть</a>
+              <a href="/order?id=<?php echo $order['order_id']; ?>" class="btn mb-1">Открыть</a>
               <a href="/order/delete?id=<?php echo $order['order_id']; ?>" class="btn btn-danger">Удалить</a>
             </td>
           </tr>

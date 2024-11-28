@@ -49,11 +49,10 @@
             </td>
           </tr>
         <?php endforeach; ?>
-      <?php else: ?>
-        <tr>
-          <td colspan="5">Нет товаров.</td>
-        </tr>
       <?php endif; ?>
+      <tr id="no-products-row" class="<?php echo empty($orderProducts) ? '' : 'hide-table-row'; ?>">
+        <td colspan="5">Нет товаров.</td>
+      </tr>
     </tbody>
   </table>
   <button type="reset" class="btn btn-danger">Сбросить</button>
@@ -64,6 +63,7 @@
   // Initialize Select2
   $(document).ready(function () {
     $('#product-select').select2();
+
     $('#btn-add-product').on('click', function () {
       const selectedProduct = $('#product-select').val();
 
@@ -72,7 +72,9 @@
       }
 
       const product = JSON.parse($('#product-select').val());
+
       let hasDuplicate = false;
+
       const rowHtml = `
           <tr class="product-row" data-product-id="${product.id}">
             <td>${product.article}</td>
@@ -91,6 +93,7 @@
             <td class="actions-td"></td>
           </tr>
         `;
+
       $('#product-list .product-row').each(function () {
         const productId = this.dataset.productId; // Получаем значение productId
 
@@ -106,11 +109,19 @@
 
           deleteButton.on("click", function () {
             row.remove();
+
+            const rowsCount = document.querySelectorAll('.product-row').length;
+
+            if (rowsCount === 0) {
+              $("#no-products-row").removeClass('hide-table-row');
+            }
           });
 
           row.find(".actions-td")?.append(deleteButton);
 
           $('#product-list').append(row);
+
+          $("#no-products-row").addClass("hide-table-row");
         } else {
           alert('Товар уже добавлен в заказ.');
         }
@@ -149,8 +160,15 @@
 
   rows.forEach(row => {
     const deleteButton = row.querySelector('.btn-delete-product');
+
     deleteButton.addEventListener('click', function () {
       row.remove();
+
+      const rowsCount = document.querySelectorAll('.product-row').length;
+
+      if (rowsCount === 0) {
+        $("#no-products-row").removeClass('hide-table-row');
+      }
     })
   });
 </script>

@@ -259,4 +259,12 @@ class Order
 
     return $stmtOrder->execute();
   }
+
+  public function refreshDateUpdated($id)
+  {
+    $query = "UPDATE orders SET date_updated = NOW() WHERE id = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("i", $id);
+    return $stmt->execute();
+  }
 }
