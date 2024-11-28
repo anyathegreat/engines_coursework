@@ -40,3 +40,9 @@ function getNearbyPageNumbers($currentPage, $totalPages)
 
   return $pageNumbers;
 }
+
+function getNumeralString($count, $one_two_five_array)
+{
+  $cases = array(2, 0, 1, 1, 1, 2);
+  return $one_two_five_array[($count % 100 > 4 && $count % 100 < 20) ? 2 : $cases[min($count % 10, 5)]];
+}

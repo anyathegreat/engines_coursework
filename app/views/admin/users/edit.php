@@ -1,5 +1,5 @@
 <h1>Редактировать пользователя</h1>
-<form action="" method="post">
+<form class="form" action="" method="post">
   <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 
   <div class="form-group">

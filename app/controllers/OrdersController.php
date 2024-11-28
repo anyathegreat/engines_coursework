@@ -14,8 +14,22 @@ class OrdersController
   {
     parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
     $page = $params['page'] ?? 1;
+    $filters = [
+      "email" => $params["email"] ?? "",
+      "phone" => $params["phone"] ?? "",
+      "firstname" => $params["firstname"] ?? "",
+      "lastname" => $params["lastname"] ?? "",
+      "status" => $params["status"] ?? "",
+      "dateFrom" => $params["dateFrom"] ?? "",
+      "dateTo" => $params["dateTo"] ?? ""
+    ];
 
-    $ordersObj = $this->orderModel->getAllOrdersWithCustomer($page);
+    if (!$filters["dateFrom"] || !$filters["dateTo"]) {
+      $filters["dateFrom"] = "";
+      $filters["dateTo"] = "";
+    }
+
+    $ordersObj = $this->orderModel->getAllOrdersWithCustomer($page, $filters);
     $orders = $ordersObj['elements'];
     $pageIndexes = getNearbyPageNumbers($ordersObj['currentPage'], $ordersObj['totalPages']);
 

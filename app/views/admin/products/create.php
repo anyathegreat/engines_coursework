@@ -3,7 +3,7 @@
   <p style="color:red;"><?php echo htmlspecialchars($errorMessage); ?></p>
 <?php endif; ?>
 
-<form id="product-form" enctype="multipart/form-data" action="" method="post">
+<form class="form" id="product-form" enctype="multipart/form-data" action="" method="post">
   <div class="form-group">
     <label for="article">Артикул:</label>
     <input required type="text" name="article" value="">
@@ -26,7 +26,7 @@
 
   <div class="form-group">
     <label for="price">Двигатель: <span class="field-extra-label">(необязательно)</span></label>
-    <select  name="engine_id">
+    <select name="engine_id">
       <option value="">Выбрать двигатель...</option>
       <?php foreach ($engines as $engine): ?>
         <option value="<?php echo $engine['id']; ?>">

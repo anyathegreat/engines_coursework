@@ -1,5 +1,5 @@
 <h1>Редактировать товар</h1>
-<form id="product-form" enctype="multipart/form-data" action="" method="post">
+<form class="form" id="product-form" enctype="multipart/form-data" action="" method="post">
   <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
 
   <div class="form-group">

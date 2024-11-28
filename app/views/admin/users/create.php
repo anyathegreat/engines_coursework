@@ -3,7 +3,7 @@
   <p style="color:red;"><?php echo htmlspecialchars($errorMessage); ?></p>
 <?php endif; ?>
 
-<form action="" method="POST">
+<form class="form" action="" method="POST">
   <div class="form-group">
     <label for="email">Email:</label>
     <input type="email" name="email" required>

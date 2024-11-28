@@ -2,7 +2,7 @@
 <hr>
 <h1>Редатирование заказа</h1>
 <div>
-  <form action="/order/edit?id=<?php echo $order['id']; ?>" method="post">
+  <form class="form" action="/order/edit?id=<?php echo $order['id']; ?>" method="post">
     <div class="form-group">
       <label for="status">Статус:</label>
       <select name="status">

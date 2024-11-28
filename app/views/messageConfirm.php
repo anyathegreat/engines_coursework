@@ -1,7 +1,7 @@
 <h1><?php echo htmlspecialchars($title); ?></h1>
 <p><?php echo htmlspecialchars($message); ?></p>
 
-<form action="" method="<?php echo $method ?? 'POST'; ?>">
+<form class="form" action="" method="<?php echo $method ?? 'POST'; ?>">
     <?php
     // Извлекаем параметры из текущего URL
     parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);

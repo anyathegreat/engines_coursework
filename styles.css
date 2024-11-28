@@ -111,7 +111,7 @@ table {
   border-radius: 4px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -139,6 +139,7 @@ form {
   background-color: #f3d1a5;
   color: black;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     background-color: #d6c9b8;
@@ -188,7 +189,6 @@ form {
   gap: 6px;
   width: max-content;
   padding: 30px 0;
-  margin: 0 auto;
 }
 
 .pagination-input-container {
@@ -211,13 +211,79 @@ form {
   text-decoration: none;
   color: black;
   background-color: #f3d1a5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d6c9b8;
+  }
+
+  &:active {
+    background-color: #d6c9b8;
+  }
+
+  &:disabled {
+    background-color: #adadad;
+    color: #474747;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    background-color: #d6c9b8;
+  }
 }
 
 .pagination-disabled {
   background-color: #adadad;
+  cursor: not-allowed;
 }
 
 .pagination-active {
   background-color: #f0c388;
   transform: translateY(-4px);
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border: 1px solid #f0c388;
+  border-radius: 4px;
+  padding: 16px;
+  max-width: 100%;
+}
+
+.filters-row {
+  display: flex;
+  gap: 24px;
+}
+
+.filters-col {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.filters-col:has(div) {
+  background-color: #f1d5af;
+}
+
+.filters-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filters-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.filters-actions .btn {
+  font-size: 1rem;
+  padding: 8px 12px;
+  cursor: pointer;
 }
